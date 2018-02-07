@@ -1,0 +1,23 @@
+
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Liste des programmes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let schedule of schedules" >
+    <ion-card-header color="primary">
+    <ion-card-title> {{schedule.name}} </ion-card-title>  
+    </ion-card-header>
+    <ion-card-content>
+      {{schedule.technology.name}} : {{schedule.duration}} Minutes
+      <div> {{schedule.remark}} </div>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
