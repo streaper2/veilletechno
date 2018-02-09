@@ -52,11 +52,16 @@ export class DataService {
   }
 
   addTechnology(technology: Technology){
-    //this.technologies= [...this.technologies, Technology]
-   
-    //console.log(this.technologies)
 
     this.db.technologies.add(technology);
+  }
+
+  updateTechnology(technology: Technology){
+    this.db.technologies.update(technology.id, technology)
+  }
+
+  deleteTechnology(Technology: Technology){
+    this.db.technologies.delete(Technology.id);
   }
 
   getAllPriorities(){

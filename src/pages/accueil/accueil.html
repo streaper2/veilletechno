@@ -20,8 +20,19 @@
   </ion-searchbar>
 
   <ion-list >
-    <ion-item *ngFor="let t of technologies " (click)="event" >
-      {{t?.name}}
-    </ion-item>
+    <ion-item-sliding *ngFor="let t of technologies; let i = index" >
+        <ion-item  (click)="modifyTechno(t)" >
+            {{t?.name}}
+        </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deleteTechnology(t, i)"><ion-icon name="trash"></ion-icon></button>
+        </ion-item-options>
+    </ion-item-sliding>
+    
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="addTechno()" ><ion-icon name="add"></ion-icon> </button>
+  </ion-fab>
+  
 </ion-content>

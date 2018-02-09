@@ -22,6 +22,7 @@
     </ion-item>
 </ion-list>
 
-<button ion-button (click)="addTechnology()" > Ajouter </button>
 
+<button ion-button (click)="addTechnology()" *ngIf=" !modify" > Ajouter </button>
+<button ion-button (click)="updateTechnology()" *ngIf=" modify" > Modifier </button>
 </ion-content>
