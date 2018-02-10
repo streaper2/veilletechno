@@ -19,7 +19,7 @@
     
   </ion-searchbar>
 
-  <ion-list >
+  <!-- <ion-list >
     <ion-item-sliding *ngFor="let t of technologies; let i = index" >
         <ion-item  (click)="modifyTechno(t)" >
             {{t?.name}}
@@ -29,8 +29,21 @@
         </ion-item-options>
     </ion-item-sliding>
     
-  </ion-list>
+  </ion-list> -->
 
+  <ion-list >
+    <ion-item-sliding *ngFor="let p of projets; let i = index" >
+        <ion-item  (click)="goProjet(p,i)" >
+          <span  item-start>{{p?.name}}</span>  <span  item-end> {{p.finish}} / 100 %  </span> 
+        </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deleteTechnology(p, i)"><ion-icon name="trash"></ion-icon></button>
+            <button ion-button color="danger" (click)="modifyTechno(p)"><ion-icon name="square"></ion-icon></button>
+        </ion-item-options>
+        
+    </ion-item-sliding>
+    
+  </ion-list>
   <ion-fab right bottom>
     <button ion-fab (click)="addTechno()" ><ion-icon name="add"></ion-icon> </button>
   </ion-fab>

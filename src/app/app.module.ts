@@ -1,4 +1,5 @@
 
+
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -16,6 +17,8 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { ScheduleListPage } from './../pages/schedule-list/schedule-list';
 
 import { DataService } from '../providers/data/data.service';
+import { ProjetManagerPage } from '../pages/projet-manager/projet-manager';
+import { MenuPage } from './../pages/menu/menu';
 
 
 
@@ -26,6 +29,8 @@ import { DataService } from '../providers/data/data.service';
     AddTechnoPage,
     SchedulePage,
     ScheduleListPage,
+    ProjetManagerPage,
+    MenuPage,
     TabsPage
   ],
   imports: [
@@ -40,6 +45,8 @@ import { DataService } from '../providers/data/data.service';
     AddTechnoPage,
     SchedulePage,
     ScheduleListPage,
+    ProjetManagerPage,
+    MenuPage,
     TabsPage
   ],
   providers: [

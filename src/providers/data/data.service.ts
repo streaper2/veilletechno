@@ -7,14 +7,18 @@ import { Injectable } from '@angular/core';
 import { Technology } from '../../models/technology';
 import { Schedule } from '../../models/schedules';
 import Dexie from 'dexie';
+import { Projet } from '../../models/projets';
 
 
 @Injectable()
 export class DataService {
 
   db;
+ 
   categories: string[] = ['front','back','fullStack','Hybride','Autre'];
   priorities: string[] = ['basse', 'moyenne', 'haute'];
+  technologies: Technology[];
+  schedules: Schedule[] = [];
 
   constructor() {
     this.db = new Dexie('veilletechno');
@@ -24,6 +28,13 @@ export class DataService {
     })
   }
 
+  projets: Projet[] = [
+    { name:'test', finish: 0, todo: [] },
+    { name:'Maison', finish: 0, todo: [] },
+    { name:'todo', finish: 0, todo: [] },
+    { name:'Dexie', finish: 0, todo: [] },
+    { name:'Maria', finish: 0, todo: [] },
+  ];
   // technologies: Technology[] = [
   //   {name: 'Angular', category:'front'},
   //   {name: 'PWA', category:'Hybride'},
@@ -32,20 +43,37 @@ export class DataService {
   //   {name: 'mongodb', category:'backend'},
   //   {name: 'ionic', category:'hybrid'}
   // ];
-  technologies: Technology[];
 
-  schedules: Schedule[] = [];
+  /*
 
 
+                PROJETS
+
+
+
+  */
+  getAllProjets(){
+    return this.projets
+  }
+  
+  addProjets(projet: Projet){
+    this.projets.push(projet)
+  }
+   /*
+
+
+                TECHNOLOGIES
+
+
+
+  */
   getAllTechnologies(): Dexie.Promise<Technology[]> {
     //return this.technologies;
     return this.db.technologies
               .toArray();
   }
 
-  getAllCategories(){
-    return this.categories;
-  }
+  
   
   search(term: string){
     return this.technologies.filter(tech => tech.name.toLocaleLowerCase().includes(term));
@@ -64,6 +92,9 @@ export class DataService {
     this.db.technologies.delete(Technology.id);
   }
 
+  getAllCategories(){
+    return this.categories;
+  }
   getAllPriorities(){
     return this.priorities;
   }

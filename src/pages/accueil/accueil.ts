@@ -7,6 +7,8 @@ import { DataService } from './../../providers/data/data.service';
 import { Technology } from '../../models/technology';
 
 import { AddTechnoPage } from './../add-techno/add-techno';
+import { Projet } from '../../models/projets';
+import { ProjetManagerPage } from '../projet-manager/projet-manager';
 
 
 
@@ -18,8 +20,10 @@ import { AddTechnoPage } from './../add-techno/add-techno';
 })
 export class AccueilPage {
 
+  projets: Projet[];
   technologies: Technology[];
 
+ 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               private dataService: DataService,
@@ -31,22 +35,27 @@ export class AccueilPage {
       content: 'veuillez patienter'
     });
     loader.present();
-    this.dataService.getAllTechnologies().then(data => this.technologies = data );
     loader.dismiss();
+    this.projets = this.dataService.getAllProjets()
+    this.dataService.getAllTechnologies().then(data => this.technologies = data );
   }
 
   search(ev:any){
 
     let val = ev.target.value;
     if (val && val.trim() != '') {
-      this.technologies = this.technologies.filter((Technology) => {
-        return (Technology.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.projets = this.projets.filter((Projet) => {
+        return (Projet.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     } else {
-      this.dataService.getAllTechnologies().then((data) => this.technologies = data);
+      this.projets = this.dataService.getAllProjets();
+      //this.dataService.getall().then((data) => this.technologies = data);
     }
   }
 
+  goProjet(p, i){
+    this.navCtrl.push(ProjetManagerPage, {projet: p});
+  }
 
   addTechno(){
     this.navCtrl.push(AddTechnoPage);
