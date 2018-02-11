@@ -1,5 +1,3 @@
-
-
 import { SchedulePage } from './../../pages/schedule/schedule';
 //import { Http } from '@angular/http';
 //import { HttpClient } from '@angular/common/http';
@@ -7,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { Technology } from '../../models/technology';
 import { Schedule } from '../../models/schedules';
 import Dexie from 'dexie';
-import { Projet } from '../../models/projets';
+import { Projet } from '../../models/projet';
 
 
 @Injectable()
@@ -19,22 +17,24 @@ export class DataService {
   priorities: string[] = ['basse', 'moyenne', 'haute'];
   technologies: Technology[];
   schedules: Schedule[] = [];
+  projets: Projet[] = [];
 
   constructor() {
     this.db = new Dexie('veilletechno');
     this.db.version(1).stores({
+      projets: '++id, name',
       schedules:'++id, name',
       technologies:'++id'
     })
   }
 
-  projets: Projet[] = [
-    { name:'test', finish: 0, todo: [] },
-    { name:'Maison', finish: 0, todo: [] },
-    { name:'todo', finish: 0, todo: [] },
-    { name:'Dexie', finish: 0, todo: [] },
-    { name:'Maria', finish: 0, todo: [] },
-  ];
+  // projets: Projet[] = [
+  //   { name:'test', finish: 0, todo: [], skills: [{technologies:[{1: 'python'}]}] },
+  //   { name:'Maison', finish: 0, todo: [] },
+  //   { name:'todo', finish: 0, todo: [] },
+  //   { name:'Dexie', finish: 0, todo: [] },
+  //   { name:'Maria', finish: 0, todo: [] },
+  // ];
   // technologies: Technology[] = [
   //   {name: 'Angular', category:'front'},
   //   {name: 'PWA', category:'Hybride'},
@@ -52,12 +52,22 @@ export class DataService {
 
 
   */
-  getAllProjets(){
-    return this.projets
+  getAllProjets(): Dexie.Promise<Projet[]> {
+    return this.db.projets
+                .toArray();
   }
   
-  addProjets(projet: Projet){
-    this.projets.push(projet)
+  addProjet(projet: Projet){
+
+    this.db.projets.add(projet)
+  
+  }
+  updateProjet(projet: Projet){
+    this.db.technologies.update(projet.id, projet)
+    
+  }
+  deleteProjet(projet: Projet){
+    this.db.projets.delete(projet.id)
   }
    /*
 
@@ -108,5 +118,10 @@ export class DataService {
 
   getAllSchedules():Dexie.Promise<Schedule[]>{
     return this.db.schedules.toArray();
+  }
+
+  addSkills(k):Dexie.Promise<string[]>{
+    return this.db.technologies.each(skills =>{ return console.log(skills) })
+        
   }
 }

@@ -1,0 +1,38 @@
+
+
+
+<ion-header>
+  
+    <ion-navbar color="primary" >
+        <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+      <ion-title>Mes compétences</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-searchbar (ionInput)="search($event)">
+      
+    </ion-searchbar>
+
+  
+    <ion-list >
+    <ion-item-sliding *ngFor="let t of technologies; let i = index" >
+        <ion-item  (click)="modifyTechno(t)" >
+          <span item-start > {{t?.name}} </span>   <span item-end> {{t?.category }} </span>
+        </ion-item>
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="deleteTechnology(t, i)"><ion-icon name="trash"></ion-icon></button>
+        </ion-item-options>
+    </ion-item-sliding>
+    
+  </ion-list> 
+
+    <ion-fab right bottom>
+      <button ion-fab (click)="addTechno()" ><ion-icon name="add"></ion-icon> </button>
+    </ion-fab>
+    
+  </ion-content>
+  

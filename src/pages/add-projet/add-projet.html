@@ -1,0 +1,49 @@
+
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>Ajouter un projet </ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  <ion-list >
+      <ion-item>
+        <ion-label floating>Nom</ion-label>
+        <ion-input [(ngModel)]="projet.name" ></ion-input>
+      </ion-item>
+      
+      <ion-item *ngFor="let s of skills"> {{s.name}}  </ion-item>
+
+  
+      <button ion-button block (click)="addTechnoToProjet()" > Ajouter des compétences </button>
+
+
+      <!-- <ion-item *ngIf="technology.name != ''  "   > 
+       <ion-select [(ngModel)]="tecnhnology.name" >
+         <ion-option value="technology.name" ></ion-option>
+       </ion-select>
+     </ion-item> -->
+
+
+
+  </ion-list>
+  
+  
+  <ion-fab right bottom>
+    <button ion-fab  (click)="addProjet()" *ngIf=" !modify" > <ion-icon name="checkmark"></ion-icon> </button>
+    <button ion-fab  (click)="updateProjet()" *ngIf="modify" > <ion-icon name="checkmark"></ion-icon> </button>
+  </ion-fab> 
+   
+  <!-- <ion-fab bottom right #fab>
+      <button ion-fab><ion-icon name="add"></ion-icon></button>
+      <ion-fab-list side="left">
+        <button ion-fab (click)="share('facebook', fab)"><ion-icon name="clipboard"></ion-icon></button>
+        <button ion-fab (click)="share('twitter', fab)"><ion-icon name="flame"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab> -->
+
+  </ion-content>
+  

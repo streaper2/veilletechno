@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Projet } from '../../models/projets';
+import { Projet } from '../../models/projet';
+import { AccueilPage } from '../accueil/accueil';
 
 @Component({
   selector: 'page-projet-manager',
@@ -19,4 +20,7 @@ export class ProjetManagerPage {
     console.log('ionViewDidLoad ProjetManagerPage');
   }
   
+  closeProjet(){
+    this.navCtrl.setRoot(AccueilPage, {},  {animate: true, direction: 'back'});
+  }
 }

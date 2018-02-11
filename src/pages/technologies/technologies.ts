@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
@@ -9,19 +10,18 @@ import { AddTechnoPage } from './../add-techno/add-techno';
 import { Projet } from '../../models/projet';
 import { ProjetManagerPage } from '../projet-manager/projet-manager';
 import { TabsPage } from '../tabs/tabs';
-import { AddProjetPage } from '../add-projet/add-projet';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 
 
 
 @Component({
-  selector: 'page-accueil',
-  templateUrl: 'accueil.html',
+  selector: 'page-technologies',
+  templateUrl: 'technologies.html',
 })
-export class AccueilPage {
+export class TechnologiesPage {
 
-  projets: Projet[];
+
   technologies: Technology[];
 
  
@@ -32,55 +32,10 @@ export class AccueilPage {
               private toastCtrl: ToastController,
               private viewCtrl: ViewController) {
   }
+
   ionViewWillEnter(){
-    // const loader = this.loadingCtrl.create({
-    //   content: 'veuillez patienter'
-    // });
-    // loader.present();
-    // loader.dismiss();
-    this.dataService.getAllProjets().then(data=> this.projets = data)
-   // this.projets = this.dataService.getAllProjets()
+  
     this.dataService.getAllTechnologies().then(data => this.technologies = data );
-  }
-
-  search(ev:any){
-
-    let val = ev.target.value;
-    if (val && val.trim() != '') {
-      this.projets = this.projets.filter((Projet) => {
-        return (Projet.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    } else {
-      this.dataService.getAllProjets().then(data => this.projets = data);
-      //this.dataService.getall().then((data) => this.technologies = data);
-    }
-  }
-
-  goProjet(p, i){
-    this.navCtrl.push(TabsPage, {projet: p});
-          
-  }
-
-  deleteProjet(p, i){
-    let deleted  = [];
-     for(let i=0; i < this.projets.length; i++){
-       if (this.projets[i].id == p.id){
-         deleted = this.projets.splice(i,1);
-        }
-        
-      }
-
-      this.dataService.deleteProjet(p)
-
-      console.log(deleted);
-      this.toastDelete(deleted[0].name);
-      
-  }
-  modifyProjet(p: Projet){
-    this.navCtrl.push(AddProjetPage,{projet: p});
-  }
-  addProjet(){
-    this.navCtrl.push(AddProjetPage);
   }
 
   addTechno(){

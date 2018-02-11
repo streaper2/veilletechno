@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Nav, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Technology } from '../../models/technology';
 import { DataService } from '../../providers/data/data.service';
+import { AccueilPage } from '../accueil/accueil';
 
 @Component({
   selector: 'page-add-techno',
@@ -13,7 +14,11 @@ export class AddTechnoPage {
   categories: string[];
   modify: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService) {
+  constructor(public navCtrl: NavController, 
+              public nav: NavController,
+              public navParams: NavParams, 
+              private dataService: DataService, 
+              private viewCtrl: ViewController) {
    
 
     if ((navParams.get('technology')) == null){
@@ -36,7 +41,7 @@ export class AddTechnoPage {
   addTechnology(){
     this.dataService.addTechnology(this.technology);
     this.technology = { name: '', category: ''};
-    this.navCtrl.pop();
+    this.navCtrl.pop()
   }
 
   updateTechnology(){
